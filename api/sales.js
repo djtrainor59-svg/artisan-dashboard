@@ -162,7 +162,7 @@ module.exports = async function handler(req, res) {
           qty:        parseInt(item.quantity || '1'),
           grossSales: ((item.base_price_money?.amount || 0) * parseInt(item.quantity || '1')) / 100,
           discounts:  (item.total_discount_money?.amount || 0) / 100,
-          netSales:   (item.total_money?.amount || 0) / 100,
+          netSales:   ((item.total_money?.amount || 0) - (item.total_tax_money?.amount || 0)) / 100,
         });
       }
     }
